@@ -12,6 +12,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "lib": ["esnext", "dom"],
     "types": ["node", "mocha", "sinon-chai"],
-    "declaration" : true
+    "declaration" : true,
+    "esModuleInterop": true
   }
 }

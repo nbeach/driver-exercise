@@ -11,8 +11,8 @@ export interface TripInput  {
     readonly distance: number
 }
 
-export interface TripSummary {
+export interface TripSummaryView {
     readonly driverName: string
-    readonly miles: number
-    readonly averageSpeed: number
+    readonly totalMiles: number
+    readonly averageMilesPerHour: number
 }

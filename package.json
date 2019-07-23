@@ -1,7 +1,5 @@
 {
   "private": true,
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
   "scripts": {
     "clean": "rimraf src/**/*.js src/**/*.js.map src/**/*.d.ts",
     "build": "npm run clean && tsc",
@@ -29,6 +27,8 @@
   },
   "dependencies": {
     "core-js": "^3.1.4",
-    "lodash": "^4.17.15"
+    "function-composition": "^1.0.12",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0"
   }
 }

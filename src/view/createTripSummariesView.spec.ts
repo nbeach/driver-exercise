@@ -1,6 +1,6 @@
 import {createTripSummariesView} from "./createTripSummariesView"
-import {TripSummaryView} from "../model/Trip"
 import {expect} from "chai"
+import {TripSummaryView} from "../model/TripSummaryView";
 
 describe(createTripSummariesView.name, () => {
 

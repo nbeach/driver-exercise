@@ -16,12 +16,6 @@ export const parseDrivers = (input: string): ReadonlyArray<Driver> => {
     return Object.values(driverMap)
 }
 
-const toCommand = (line: string): Command => {
-    return line
-        .split(/\s+/)
-        .filter(value => value !== "")
-}
-
 const splitLines = (input: string): ReadonlyArray<string> => {
     return input
         .trim()
@@ -29,27 +23,37 @@ const splitLines = (input: string): ReadonlyArray<string> => {
         .filter(value => value.trim() !== "")
 }
 
+const toCommand = (line: string): Command => {
+    return line
+        .split(/\s+/)
+        .filter(value => value !== "")
+}
+
+
 const toDriver = ([commandName, ...args]: Command): Driver => {
     switch (commandName) {
         case "Trip":
-            const [name, startTime, endTime, distance] = args
-            return {
-                name,
-                trips: [{
-                    startTime: moment(startTime, TIME_FORMAT),
-                    endTime: moment(endTime, TIME_FORMAT),
-                    distance: Number(distance),
-                }],
-            }
-
+            return tripCommandToDriver(args)
         case "Driver":
-            const [driverName] = args
-            return { name: driverName, trips: [] }
-
+            return driverCommandToDriver(args)
         default:
             throw new Error("Unknown Command")
     }
 }
+
+const tripCommandToDriver = ([name, startTime, endTime, distance]: ReadonlyArray<string>): Driver => ({
+    name,
+    trips: [{
+        startTime: moment(startTime, TIME_FORMAT),
+        endTime: moment(endTime, TIME_FORMAT),
+        distance: Number(distance),
+    }],
+})
+
+const driverCommandToDriver = ([name]: ReadonlyArray<string>): Driver => ({
+    name,
+    trips: [],
+})
 
 const mergeDuplicateDrivers = (drivers: ObjectMap<Driver>, nextDriver: Driver): ObjectMap<Driver> => {
     const existingDriver = drivers[nextDriver.name]

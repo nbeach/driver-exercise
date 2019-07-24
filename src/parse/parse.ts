@@ -4,7 +4,7 @@ import {TripInput} from "../model/Trip"
 export const parseDrivers = (input: string): ReadonlyArray<Driver> => {
     const commands = input
         .split("\n")
-        .map(line => explodeLine(line))
+        .map(explodeLine)
 
     const drivers = commands
         .filter(isDriverCommand)

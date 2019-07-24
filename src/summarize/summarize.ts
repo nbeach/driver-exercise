@@ -3,11 +3,18 @@ import {Driver} from "../model/Driver"
 import {Trip, TripSummaryView} from "../model/Trip"
 
 export const summarizeTrips = (drivers: ReadonlyArray<Driver>): ReadonlyArray<TripSummaryView> => {
-    return drivers.map(({name, trips}) => ({
-        driverName: name,
-        totalMiles: totalMiles(trips),
-        averageMilesPerHour: averageMilesPerHour(trips),
-    }))
+    return drivers.map(({name, trips}) => {
+        const filteredTrips = trips.filter(trip => {
+            const averageMilesPerHourForTrip = averageMilesPerHour([trip])
+            return averageMilesPerHourForTrip === null || (averageMilesPerHourForTrip >= 5 && averageMilesPerHourForTrip <= 100)
+        })
+
+        return ({
+            driverName: name,
+            totalMiles: totalMiles(filteredTrips),
+            averageMilesPerHour: averageMilesPerHour(filteredTrips),
+        })
+    })
 }
 
 const totalMiles = (trips: ReadonlyArray<Trip>): number => {
@@ -26,6 +33,6 @@ const timeDifference = (startTime: string, endTime: string): number => {
     return moment.duration(timeDifference).asHours()
 }
 
-const averageMilesPerHour = (trips: ReadonlyArray<Trip>): number => {
-    return totalMiles(trips) / totalHours(trips)
+const averageMilesPerHour = (trips: ReadonlyArray<Trip>): number | null => {
+    return trips.length === 0 ? null : totalMiles(trips) / totalHours(trips)
 }

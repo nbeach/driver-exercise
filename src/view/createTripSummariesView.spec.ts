@@ -1,8 +1,8 @@
-import {displayTripSummariesView} from "./displayTripSummariesView"
+import {createTripSummariesView} from "./createTripSummariesView"
 import {TripSummaryView} from "../model/Trip"
 import {expect} from "chai"
 
-describe(displayTripSummariesView.name, () => {
+describe(createTripSummariesView.name, () => {
 
     it("formats trip summaries for viewing", () => {
         const summaries: ReadonlyArray<TripSummaryView> = [
@@ -10,19 +10,15 @@ describe(displayTripSummariesView.name, () => {
             { driverName: "Alex", totalMiles: 30, averageMilesPerHour: 40 },
         ]
 
-        const actual = displayTripSummariesView(summaries)
-
-        expect(actual).to.eql("Dan: 10 miles @ 20 mph\nAlex: 30 miles @ 40 mph\n")
+        expect(createTripSummariesView(summaries)).to.eql("Dan: 10 miles @ 20 mph\nAlex: 30 miles @ 40 mph\n")
     })
 
-    it("when a driver has not average miles per hour it excludes it", () => {
+    it("when a driver does not have an average miles per hour it excludes that section for the driver", () => {
         const summaries: ReadonlyArray<TripSummaryView> = [
             { driverName: "Dan", totalMiles: 0, averageMilesPerHour: null },
         ]
 
-        const actual = displayTripSummariesView(summaries)
-
-        expect(actual).to.eql("Dan: 0 miles\n")
+        expect(createTripSummariesView(summaries)).to.eql("Dan: 0 miles\n")
     })
 
 })

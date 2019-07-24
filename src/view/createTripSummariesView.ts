@@ -1,6 +1,6 @@
 import {TripSummaryView} from "../model/Trip"
 
-export const displayTripSummariesView = (summaries: ReadonlyArray<TripSummaryView>): string => {
+export const createTripSummariesView = (summaries: ReadonlyArray<TripSummaryView>): string => {
     return summaries.map(formatSummary).join("")
 }
 

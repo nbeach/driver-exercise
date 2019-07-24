@@ -2,9 +2,9 @@ import {Driver} from "../model/Driver"
 import {Trip} from "../model/Trip"
 import {sumBy} from "lodash"
 import {hoursElapsed} from "../util/time.util"
-import {TripSummaryView} from "../model/TripSummaryView";
+import {TripSummary} from "../model/TripSummary";
 
-export const summarizeDriverTrips = ({name, trips}: Driver): TripSummaryView => {
+export const summarizeDriverTrips = ({name, trips}: Driver): TripSummary => {
     const filteredTrips = trips.filter(withinSpeedBounds)
 
     return ({

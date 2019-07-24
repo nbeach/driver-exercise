@@ -2,13 +2,13 @@ import {expect} from "chai"
 import {Driver} from "../model/Driver"
 import {summarizeDriverTrips} from "./summarize"
 import {time} from "../util/test.util"
-import {TripSummaryView} from "../model/TripSummaryView";
+import {TripSummary} from "../model/TripSummary";
 
 
 describe(summarizeDriverTrips.name, () => {
 
     describe("processes drivers into a summary that includes the", () => {
-        let summary: TripSummaryView
+        let summary: TripSummary
 
         beforeEach(() => {
             const driver: Driver = {
@@ -37,7 +37,7 @@ describe(summarizeDriverTrips.name, () => {
     })
 
     describe("when a driver has no trips it summarizes", () => {
-        let summary: TripSummaryView
+        let summary: TripSummary
 
         beforeEach(() => {
             const driver: Driver = {

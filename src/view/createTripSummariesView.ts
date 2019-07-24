@@ -1,10 +1,10 @@
-import {TripSummaryView} from "../model/TripSummaryView";
+import {TripSummary} from "../model/TripSummary";
 
-export const createTripSummariesView = (summaries: ReadonlyArray<TripSummaryView>): string => {
+export const createTripSummariesView = (summaries: ReadonlyArray<TripSummary>): string => {
     return summaries.map(formatSummary).join("")
 }
 
-const formatSummary = ({ driverName, totalMiles, averageMilesPerHour }: TripSummaryView): string => {
+const formatSummary = ({ driverName, totalMiles, averageMilesPerHour }: TripSummary): string => {
     const formattedAverageMilesPerHourSection = averageMilesPerHour === null ? "" :  ` @ ${averageMilesPerHour} mph`
     return `${driverName}: ${totalMiles} miles${formattedAverageMilesPerHourSection}\n`
 }

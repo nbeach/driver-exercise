@@ -40,9 +40,9 @@ describe(parseDrivers.name, () => {
 
     })
 
-
+    //TODO: split this to multiple tests
     it("accepts input with varied whitespace between entries", () => {
-        const input = `Driver\t\tDan\r\n     Trip Dan      07:15 07:45 17.3\r`
+        const input = `Driver\t\tDan\r\n  \r\n   Trip Dan      07:15 07:45 17.3\r`
 
         const expected: ReadonlyArray<Driver> = [
             {
@@ -54,5 +54,8 @@ describe(parseDrivers.name, () => {
         expect(parseDrivers(input)).to.eql(expected)
     })
 
+    it("throws an exception if a command is not recognized", () => {
+        expect(() => parseDrivers("Unknown 123")).to.throw()
+    })
 
 })

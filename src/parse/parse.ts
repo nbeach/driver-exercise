@@ -1,47 +1,47 @@
 import {Driver} from "../model/Driver"
-import {TripInput} from "../model/Trip"
+import {Trip} from "../model/Trip"
+
+interface ObjectMap<T> { readonly [key: string]: T | undefined }
+type Command = ReadonlyArray<string>
 
 export const parseDrivers = (input: string): ReadonlyArray<Driver> => {
-    const commands = input
-        .split("\n")
-        .map(explodeLine)
-
-    const drivers = commands
-        .filter(isDriverCommand)
-        .map(parseDriver)
-        .map(name => ({ name, trips: [] }))
-
-    const driverTrips = commands
-        .filter(isTripCommand)
-        .map(parseTrip)
+    const driverMap = splitLines(input)
+        .map(toCommand)
         .map(toDriver)
+        .reduce(mergeDuplicateDrivers, {})
 
-    return Object.values([...drivers, ...driverTrips].reduce(mergeDrivers, {}))
+    return Object.values(driverMap)
 }
 
-const explodeLine = (line: string): ReadonlyArray<string> => {
-    return line.split(" ")
-        .map(value => value.trim())
+const toCommand = (line: string): Command => {
+    return line
+        .split(/\s+/)
         .filter(value => value !== "")
 }
 
-const isDriverCommand = ([command]: ReadonlyArray<string>): boolean => command === "Driver"
-const isTripCommand = ([command]: ReadonlyArray<string>): boolean =>  command === "Trip"
+const splitLines = (input: string): ReadonlyArray<string> => {
+    return input
+        .trim()
+        .split(/[\r\n]+/)
+        .filter(value => value.trim() !== "")
+}
 
-const parseDriver = ([_, name]: ReadonlyArray<string>): string => name
+const toDriver = ([commandName, ...args]: Command): Driver => {
+    switch (commandName) {
+        case "Trip":
+            const [name, startTime, endTime, distance] = args
+            return { name, trips: [{ startTime, endTime, distance: Number(distance)}] }
 
-const parseTrip = ([_, driverName, startTime, endTime, distance]: ReadonlyArray<string>): TripInput => ({
-    driverName, startTime, endTime, distance: Number(distance),
-})
+        case "Driver":
+            const [driverName] = args
+            return { name: driverName, trips: [] }
 
-const toDriver = ({driverName, startTime, endTime, distance}: TripInput): Driver => ({
-    name: driverName,
-    trips: [{ startTime, endTime, distance}],
-})
+        default:
+            throw new Error("Unknown Command")
+    }
+}
 
-interface ObjectMap<V> { readonly [key: string]: V | undefined }
-
-const mergeDrivers = (drivers: ObjectMap<Driver>, nextDriver: Driver): ObjectMap<Driver> => {
+const mergeDuplicateDrivers = (drivers: ObjectMap<Driver>, nextDriver: Driver): ObjectMap<Driver> => {
     const existingDriver = drivers[nextDriver.name]
 
     const updatedDriver = existingDriver === undefined ? nextDriver : {
@@ -49,5 +49,8 @@ const mergeDrivers = (drivers: ObjectMap<Driver>, nextDriver: Driver): ObjectMap
         trips: [...existingDriver.trips, ...nextDriver.trips],
     }
 
-    return { ...drivers, [nextDriver.name]: updatedDriver }
+    return {
+        ...drivers,
+        [nextDriver.name]: updatedDriver,
+    }
 }

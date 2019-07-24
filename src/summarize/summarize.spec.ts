@@ -2,6 +2,7 @@ import {expect} from "chai"
 import {TripSummaryView} from "../model/Trip"
 import {Driver} from "../model/Driver"
 import {summarizeDriverTrips} from "./summarize"
+import {time} from "../util/test.util"
 
 
 describe(summarizeDriverTrips.name, () => {
@@ -13,8 +14,8 @@ describe(summarizeDriverTrips.name, () => {
             const driver: Driver = {
                 name: "Dan",
                 trips: [
-                    { startTime: "01:00", endTime: "02:00", distance: 5},
-                    { startTime: "03:00", endTime: "04:00", distance: 100},
+                    { startTime: time("01:00"), endTime: time("02:00"), distance: 5 },
+                    { startTime: time("03:00"), endTime: time("04:00"), distance: 100 },
                 ],
             }
 
@@ -63,8 +64,8 @@ describe(summarizeDriverTrips.name, () => {
             const driver: Driver = {
                 name: "Dan",
                 trips: [
-                    { startTime: "01:00", endTime: "02:00", distance: 4.99},
-                    { startTime: "03:00", endTime: "04:00", distance: 10},
+                    { startTime: time("01:00"), endTime: time("02:00"), distance: 4.99 },
+                    { startTime: time("03:00"), endTime: time("04:00"), distance: 10 },
                 ],
             }
 
@@ -78,8 +79,8 @@ describe(summarizeDriverTrips.name, () => {
             const driver: Driver = {
                 name: "Dan",
                 trips: [
-                    { startTime: "01:00", endTime: "02:00", distance: 100.01},
-                    { startTime: "03:00", endTime: "04:00", distance: 10},
+                    { startTime: time("01:00"), endTime: time("02:00"), distance: 100.01},
+                    { startTime: time("03:00"), endTime: time("04:00"), distance: 10 },
                 ],
             }
 

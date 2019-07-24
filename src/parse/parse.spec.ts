@@ -1,6 +1,7 @@
 import {parseDrivers} from "./parse"
 import {expect} from "chai"
 import {Driver} from "../model/Driver"
+import {time} from "../util/test.util"
 
 describe(parseDrivers.name, () => {
 
@@ -16,8 +17,8 @@ describe(parseDrivers.name, () => {
             {
                 name: "Dan",
                 trips: [
-                    { startTime: "07:15", endTime: "07:45", distance: 17.3},
-                    { startTime: "06:12", endTime: "06:32", distance: 21.8},
+                    { startTime: time("07:15"), endTime: time("07:45"), distance: 17.3},
+                    { startTime: time("06:12"), endTime: time("06:32"), distance: 21.8},
                 ],
             },
         ]
@@ -40,14 +41,14 @@ describe(parseDrivers.name, () => {
 
     })
 
-    //TODO: split this to multiple tests
+    // TODO: split this to multiple tests
     it("accepts input with varied whitespace between entries", () => {
         const input = `Driver\t\tDan\r\n  \r\n   Trip Dan      07:15 07:45 17.3\r`
 
         const expected: ReadonlyArray<Driver> = [
             {
                 name: "Dan",
-                trips: [{ startTime: "07:15", endTime: "07:45", distance: 17.3}],
+                trips: [{ startTime: time("07:15"), endTime: time("07:45"), distance: 17.3}],
             },
         ]
 

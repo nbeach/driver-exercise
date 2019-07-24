@@ -1,5 +1,8 @@
 import {Driver} from "../model/Driver"
 import {Trip} from "../model/Trip"
+import moment from "moment"
+
+const TIME_FORMAT = "HH:mm"
 
 interface ObjectMap<T> { readonly [key: string]: T | undefined }
 type Command = ReadonlyArray<string>
@@ -30,7 +33,14 @@ const toDriver = ([commandName, ...args]: Command): Driver => {
     switch (commandName) {
         case "Trip":
             const [name, startTime, endTime, distance] = args
-            return { name, trips: [{ startTime, endTime, distance: Number(distance)}] }
+            return {
+                name,
+                trips: [{
+                    startTime: moment(startTime, TIME_FORMAT),
+                    endTime: moment(endTime, TIME_FORMAT),
+                    distance: Number(distance),
+                }],
+            }
 
         case "Driver":
             const [driverName] = args

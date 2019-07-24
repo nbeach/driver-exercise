@@ -1,13 +1,8 @@
-export interface Trip {
-    readonly startTime: string
-    readonly endTime: string
-    readonly distance: number
-}
+import {Moment} from "moment"
 
-export interface TripInput  {
-    readonly driverName: string
-    readonly startTime: string
-    readonly endTime: string
+export interface Trip {
+    readonly startTime: Moment
+    readonly endTime: Moment
     readonly distance: number
 }
 

@@ -7,7 +7,7 @@ import {TripSummary} from "../model/TripSummary"
 
 describe(summarizeDriverTrips.name, () => {
 
-    describe("processes drivers into a summary that includes the", () => {
+    describe("processes driver into a summary that includes the", () => {
         let summary: TripSummary
 
         beforeEach(() => {
@@ -58,7 +58,7 @@ describe(summarizeDriverTrips.name, () => {
 
     })
 
-    describe("excludes trips with and average speed", () => {
+    describe("excludes from the summary trips with and average speed", () => {
 
         it("less than 5mph", () => {
             const driver: Driver = {

@@ -30,7 +30,6 @@ const splitCommandAndArgs = (line: string): readonly string[] => {
         .filter(negate(isEmpty))
 }
 
-
 const toDriver = ([commandName, ...args]: readonly string[]): Driver => {
     switch (commandName) {
         case "Trip": return tripCommandToDriver(args)

@@ -41,18 +41,27 @@ describe(parseDrivers.name, () => {
 
     })
 
-    // TODO: split this to multiple tests
-    it("accepts input with varied whitespace between entries", () => {
-        const input = `Driver\t\tDan\r\n  \r\n   Trip Dan      07:15 07:45 17.3\r`
+    describe("accepts input with", () => {
 
-        const expected: readonly Driver[] = [
-            {
-                name: "Dan",
-                trips: [{ startTime: time("07:15"), endTime: time("07:45"), distance: 17.3}],
-            },
-        ]
+        [
+            { description: "multiple spaces between arguments", input: "Driver    Dan\r\n Trip Dan   01:15 01:45 17"     },
+            { description: "tabs between arguments",            input: "Driver\t\tDan\r\n Trip Dan 01:15\t\t01:45 17"  },
+            { description: "blank lines" ,                      input: "Driver Dan\r\n \r\n Trip Dan 01:15 01:45 17"   },
+            { description: "leading whitespace" ,               input: "\t Driver Dan\r\n \t Trip Dan 01:15 01:45 17"  },
+            { description: "trailing whitespace" ,               input: "Driver Dan\t \r\n Trip Dan 01:15 01:45 17 \t" },
+        ].forEach(scenario => {
+            it(scenario.description, () => {
+                const expected: readonly Driver[] = [
+                    {
+                        name: "Dan",
+                        trips: [{ startTime: time("01:15"), endTime: time("01:45"), distance: 17 }],
+                    },
+                ]
 
-        expect(parseDrivers(input)).to.eql(expected)
+                expect(parseDrivers(scenario.input)).to.eql(expected)
+            })
+        })
+
     })
 
     it("throws an exception if a command is not recognized", () => {

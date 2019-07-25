@@ -3,10 +3,6 @@ import {Trip} from "../model/Trip"
 import moment from "moment"
 import {trim, negate, isEmpty} from "lodash"
 
-const TIME_FORMAT = "HH:mm"
-
-interface ObjectMap<T> { readonly [key: string]: T | undefined }
-
 export const parseDrivers = (input: string): readonly Driver[] => {
     const driverMap = splitLines(input)
         .map(splitCommandAndArgs)
@@ -15,6 +11,9 @@ export const parseDrivers = (input: string): readonly Driver[] => {
 
     return Object.values(driverMap)
 }
+
+const TIME_FORMAT = "HH:mm"
+interface ObjectMap<T> { readonly [key: string]: T | undefined }
 
 const splitLines = (input: string): readonly string[] => {
     return input

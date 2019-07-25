@@ -9,7 +9,9 @@ describe(parseDrivers.name, () => {
 
         const input = `
             Driver Dan
+            Driver Alex
             Trip Dan 07:15 07:45 17.3
+            Trip Alex 01:00 02:00 10
             Trip Dan 06:12 06:32 21.8
          `
 
@@ -19,6 +21,12 @@ describe(parseDrivers.name, () => {
                 trips: [
                     { startTime: time("07:15"), endTime: time("07:45"), distance: 17.3},
                     { startTime: time("06:12"), endTime: time("06:32"), distance: 21.8},
+                ],
+            },
+            {
+                name: "Alex",
+                trips: [
+                    { startTime: time("01:00"), endTime: time("02:00"), distance: 10},
                 ],
             },
         ]

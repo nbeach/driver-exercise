@@ -7,7 +7,7 @@ const TIME_FORMAT = "HH:mm"
 
 interface ObjectMap<T> { readonly [key: string]: T | undefined }
 
-export const parseDrivers = (input: string): ReadonlyArray<Driver> => {
+export const parseDrivers = (input: string): readonly Driver[] => {
     const driverMap = splitLines(input)
         .map(splitCommandAndArgs)
         .map(toDriver)
@@ -16,7 +16,7 @@ export const parseDrivers = (input: string): ReadonlyArray<Driver> => {
     return Object.values(driverMap)
 }
 
-const splitLines = (input: string): ReadonlyArray<string> => {
+const splitLines = (input: string): readonly string[] => {
     return input
         .trim()
         .split(/[\r\n]+/)
@@ -24,14 +24,14 @@ const splitLines = (input: string): ReadonlyArray<string> => {
         .filter(negate(isEmpty))
 }
 
-const splitCommandAndArgs = (line: string): ReadonlyArray<string> => {
+const splitCommandAndArgs = (line: string): readonly string[] => {
     return line
         .split(/\s+/)
         .filter(negate(isEmpty))
 }
 
 
-const toDriver = ([commandName, ...args]: ReadonlyArray<string>): Driver => {
+const toDriver = ([commandName, ...args]: readonly string[]): Driver => {
     switch (commandName) {
         case "Trip": return tripCommandToDriver(args)
         case "Driver": return driverCommandToDriver(args)
@@ -39,7 +39,7 @@ const toDriver = ([commandName, ...args]: ReadonlyArray<string>): Driver => {
     }
 }
 
-const tripCommandToDriver = ([name, startTime, endTime, distance]: ReadonlyArray<string>): Driver => ({
+const tripCommandToDriver = ([name, startTime, endTime, distance]: readonly string[]): Driver => ({
     name,
     trips: [{
         startTime: moment(startTime, TIME_FORMAT),
@@ -48,7 +48,7 @@ const tripCommandToDriver = ([name, startTime, endTime, distance]: ReadonlyArray
     }],
 })
 
-const driverCommandToDriver = ([name]: ReadonlyArray<string>): Driver => ({
+const driverCommandToDriver = ([name]: readonly string[]): Driver => ({
     name,
     trips: [],
 })

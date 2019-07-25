@@ -5,7 +5,7 @@ import {TripSummary} from "../model/TripSummary"
 describe(createTripSummariesView.name, () => {
 
     it("formats trip summaries for viewing in order by miles driven descending", () => {
-        const summaries: ReadonlyArray<TripSummary> = [
+        const summaries: readonly TripSummary[] = [
             { driverName: "Alex", totalMiles: 20, averageMilesPerHour: 50 },
             { driverName: "Sarah", totalMiles: 30, averageMilesPerHour: 70 },
             { driverName: "Dan", totalMiles: 10, averageMilesPerHour: 60 },
@@ -16,7 +16,7 @@ describe(createTripSummariesView.name, () => {
     })
 
     it("when a driver does not have an average miles per hour it excludes that section for the driver", () => {
-        const summaries: ReadonlyArray<TripSummary> = [
+        const summaries: readonly TripSummary[] = [
             { driverName: "Dan", totalMiles: 0, averageMilesPerHour: null },
         ]
 
@@ -26,7 +26,7 @@ describe(createTripSummariesView.name, () => {
     describe("rounds to a whole number the", () => {
 
         it("total miles", () => {
-            const summaries: ReadonlyArray<TripSummary> = [
+            const summaries: readonly TripSummary[] = [
                 { driverName: "Alex", totalMiles: 20.5, averageMilesPerHour: 1 },
             ]
 
@@ -35,7 +35,7 @@ describe(createTripSummariesView.name, () => {
         })
 
         it("average miles per hour", () => {
-            const summaries: ReadonlyArray<TripSummary> = [
+            const summaries: readonly TripSummary[] = [
                 { driverName: "Alex", totalMiles: 1, averageMilesPerHour: 20.4 },
             ]
 

@@ -13,7 +13,7 @@ describe(parseDrivers.name, () => {
             Trip Dan 06:12 06:32 21.8
          `
 
-        const expected: ReadonlyArray<Driver> = [
+        const expected: readonly Driver[] = [
             {
                 name: "Dan",
                 trips: [
@@ -32,7 +32,7 @@ describe(parseDrivers.name, () => {
         it("the driver is still included", () => {
             const input = "Driver Dan"
 
-            const expected: ReadonlyArray<Driver> = [
+            const expected: readonly Driver[] = [
                 { name: "Dan", trips: [] },
             ]
 
@@ -45,7 +45,7 @@ describe(parseDrivers.name, () => {
     it("accepts input with varied whitespace between entries", () => {
         const input = `Driver\t\tDan\r\n  \r\n   Trip Dan      07:15 07:45 17.3\r`
 
-        const expected: ReadonlyArray<Driver> = [
+        const expected: readonly Driver[] = [
             {
                 name: "Dan",
                 trips: [{ startTime: time("07:15"), endTime: time("07:45"), distance: 17.3}],

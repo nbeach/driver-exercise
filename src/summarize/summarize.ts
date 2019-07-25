@@ -19,14 +19,14 @@ const withinSpeedBounds = (trip: Trip): boolean => {
     return averageMph >= 5 && averageMph <= 100
 }
 
-const averageMilesPerHour = (trips: ReadonlyArray<Trip>): number | null => {
+const averageMilesPerHour = (trips: readonly Trip[]): number | null => {
     return isEmpty(trips) ? null : totalMiles(trips) / totalHours(trips)
 }
 
-const totalMiles = (trips: ReadonlyArray<Trip>): number => {
+const totalMiles = (trips: readonly Trip[]): number => {
     return sumBy(trips, trip => trip.distance)
 }
 
-const totalHours = (trips: ReadonlyArray<Trip>): number => {
+const totalHours = (trips: readonly Trip[]): number => {
     return sumBy(trips, ({startTime, endTime}) => hoursElapsed(startTime, endTime))
 }

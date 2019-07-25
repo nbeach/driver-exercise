@@ -1,7 +1,7 @@
 import {TripSummary} from "../model/TripSummary"
 import {sortBy} from "lodash"
 
-export const createTripSummariesView = (summaries: ReadonlyArray<TripSummary>): string => {
+export const createTripSummariesView = (summaries: readonly TripSummary[]): string => {
     return sortBy(summaries, summary => summary.totalMiles)
         .reverse()
         .map(formatSummary)

@@ -3,29 +3,25 @@ import {Trip} from "../model/Trip"
 import moment from "moment"
 import {trim, negate, isEmpty} from "lodash"
 
+const TIME_FORMAT = "HH:mm"
+const NEW_LINE = /[\r\n]+/
+const WHITESPACE = /\s+/
+interface ObjectMap<T> { readonly [key: string]: T | undefined }
+
 export const parseDrivers = (input: string): readonly Driver[] => {
-    const driverMap = splitLines(input)
-        .map(splitCommandAndArgs)
+    const driverMap = splitOn(NEW_LINE)(input)
+        .map(splitOn(WHITESPACE))
         .map(toDriver)
-        .reduce(mergeDuplicateDrivers, {})
+        .reduce(mergeDriversWithSameName, {})
 
     return Object.values(driverMap)
 }
 
-const TIME_FORMAT = "HH:mm"
-interface ObjectMap<T> { readonly [key: string]: T | undefined }
-
-const splitLines = (input: string): readonly string[] => {
-    return input
+const splitOn = (pattern: RegExp): (input: string) => readonly string[] => {
+    return (input: string) => input
         .trim()
-        .split(/[\r\n]+/)
+        .split(pattern)
         .map(trim)
-        .filter(negate(isEmpty))
-}
-
-const splitCommandAndArgs = (line: string): readonly string[] => {
-    return line
-        .split(/\s+/)
         .filter(negate(isEmpty))
 }
 
@@ -51,7 +47,7 @@ const driverCommandToDriver = ([name]: readonly string[]): Driver => ({
     trips: [],
 })
 
-const mergeDuplicateDrivers = (drivers: ObjectMap<Driver>, nextDriver: Driver): ObjectMap<Driver> => {
+const mergeDriversWithSameName = (drivers: ObjectMap<Driver>, nextDriver: Driver): ObjectMap<Driver> => {
     const existingDriver = drivers[nextDriver.name]
 
     const updatedDriver = existingDriver === undefined ? nextDriver : {

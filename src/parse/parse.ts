@@ -19,7 +19,6 @@ export const parseDrivers = (input: string): readonly Driver[] => {
 
 const splitOn = (pattern: RegExp): (input: string) => readonly string[] => {
     return (input: string) => input
-        .trim()
         .split(pattern)
         .map(trim)
         .filter(negate(isEmpty))

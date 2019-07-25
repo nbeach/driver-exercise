@@ -26,7 +26,6 @@ describe(parseDrivers.name, () => {
         expect(parseDrivers(input)).to.eql(expected)
     })
 
-
     describe("when a driver has no trips", () => {
 
         it("the driver is still included", () => {
@@ -44,11 +43,11 @@ describe(parseDrivers.name, () => {
     describe("accepts input with", () => {
 
         [
-            { description: "multiple spaces between arguments", input: "Driver    Dan\r\n Trip Dan   01:15 01:45 17"     },
+            { description: "multiple spaces between arguments", input: "Driver    Dan\r\n Trip Dan   01:15 01:45 17"   },
             { description: "tabs between arguments",            input: "Driver\t\tDan\r\n Trip Dan 01:15\t\t01:45 17"  },
             { description: "blank lines" ,                      input: "Driver Dan\r\n \r\n Trip Dan 01:15 01:45 17"   },
             { description: "leading whitespace" ,               input: "\t Driver Dan\r\n \t Trip Dan 01:15 01:45 17"  },
-            { description: "trailing whitespace" ,               input: "Driver Dan\t \r\n Trip Dan 01:15 01:45 17 \t" },
+            { description: "trailing whitespace" ,              input: "Driver Dan\t \r\n Trip Dan 01:15 01:45 17 \t"  },
         ].forEach(scenario => {
             it(scenario.description, () => {
                 const expected: readonly Driver[] = [

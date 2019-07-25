@@ -3,16 +3,14 @@
     "target": "ES5",
     "module": "commonjs",
     "sourceMap": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "importHelpers": true,
     "noEmitHelpers": true,
     "strict": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
-    "lib": ["esnext", "dom"],
-    "types": ["node", "mocha", "sinon-chai"],
-    "declaration" : true,
-    "esModuleInterop": true
+    "lib": ["esnext"],
+    "types": ["node", "mocha"],
+    "esModuleInterop": true,
+    "outDir": "build"
   }
 }

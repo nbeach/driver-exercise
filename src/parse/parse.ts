@@ -1,15 +1,15 @@
 import {Driver} from "../model/Driver"
 import {Trip} from "../model/Trip"
 import moment from "moment"
+import {trim, negate, isEmpty} from "lodash"
 
 const TIME_FORMAT = "HH:mm"
 
 interface ObjectMap<T> { readonly [key: string]: T | undefined }
-type Command = ReadonlyArray<string>
 
 export const parseDrivers = (input: string): ReadonlyArray<Driver> => {
     const driverMap = splitLines(input)
-        .map(toCommand)
+        .map(splitCommandAndArgs)
         .map(toDriver)
         .reduce(mergeDuplicateDrivers, {})
 
@@ -20,17 +20,18 @@ const splitLines = (input: string): ReadonlyArray<string> => {
     return input
         .trim()
         .split(/[\r\n]+/)
-        .filter(value => value.trim() !== "")
+        .map(trim)
+        .filter(negate(isEmpty))
 }
 
-const toCommand = (line: string): Command => {
+const splitCommandAndArgs = (line: string): ReadonlyArray<string> => {
     return line
         .split(/\s+/)
-        .filter(value => value !== "")
+        .filter(negate(isEmpty))
 }
 
 
-const toDriver = ([commandName, ...args]: Command): Driver => {
+const toDriver = ([commandName, ...args]: ReadonlyArray<string>): Driver => {
     switch (commandName) {
         case "Trip":
             return tripCommandToDriver(args)

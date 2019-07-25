@@ -1,5 +1,5 @@
 --recursive
---require ts-node/register
+--require ts-node/register/transpile-only
 --watch-extensions ts
---reporter nyan
+--reporter progress
 src/**/*.spec.ts

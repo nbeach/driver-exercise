@@ -2,7 +2,7 @@ import {expect} from "chai"
 import {Driver} from "../model/Driver"
 import {summarizeDriverTrips} from "./summarize"
 import {time} from "../util/test.util"
-import {TripSummary} from "../model/TripSummary";
+import {TripSummary} from "../model/TripSummary"
 
 
 describe(summarizeDriverTrips.name, () => {

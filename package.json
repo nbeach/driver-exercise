@@ -1,9 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "app": "ts-node src/app.ts",
-    "clean": "rimraf src/**/*.js src/**/*.js.map src/**/*.d.ts",
-    "build": "npm run clean && tsc",
+    "clean": "rimraf build",
+    "build": "npm run clean && tsc --project tsconfig.build.json",
     "test": "mocha --opts mocha.opts --watch",
     "test:once": "mocha --opts mocha.opts",
     "lint": "tslint --project .",
@@ -18,7 +17,6 @@
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "rimraf": "^2.6.3",
-    "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "tslint-immutable": "^6.0.1",

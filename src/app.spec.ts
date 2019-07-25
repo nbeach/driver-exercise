@@ -11,7 +11,7 @@ describe("App", () => {
             Trip Alex 01:00 2:00 5
         `
 
-        const output = execSync(`echo "${input}" | npm run app`).toString()
+        const output = execSync(`echo "${input}" | ./node_modules/.bin/ts-node --transpile-only src/app.ts`).toString()
 
         expect(output).to.contain("Dan")
         expect(output).to.contain("10 miles")

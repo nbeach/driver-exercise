@@ -33,12 +33,9 @@ const splitCommandAndArgs = (line: string): ReadonlyArray<string> => {
 
 const toDriver = ([commandName, ...args]: ReadonlyArray<string>): Driver => {
     switch (commandName) {
-        case "Trip":
-            return tripCommandToDriver(args)
-        case "Driver":
-            return driverCommandToDriver(args)
-        default:
-            throw new Error("Unknown Command")
+        case "Trip": return tripCommandToDriver(args)
+        case "Driver": return driverCommandToDriver(args)
+        default: throw new Error("Unknown Command")
     }
 }
 

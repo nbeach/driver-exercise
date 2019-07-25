@@ -7,7 +7,7 @@
     "test:once": "mocha --opts mocha.opts",
     "lint": "tslint --project .",
     "lint:fix": "tslint --fix --project .",
-    "ci": "yarn lint && yarn test:once && yarn build"
+    "ci": "npm run lint && npm run test:once && npm run build"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

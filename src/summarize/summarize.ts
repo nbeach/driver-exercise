@@ -2,13 +2,13 @@ import {Driver} from "../model/Driver"
 import {Trip} from "../model/Trip"
 import {sumBy, isEmpty} from "lodash"
 import {hoursElapsed} from "../common/time.util"
-import {TripSummary} from "../model/TripSummary"
+import {DriverTripsSummary} from "../model/DriverTripsSummary"
 
-export const summarizeDriverTrips = ({name, trips}: Driver): TripSummary => {
+export const summarizeDriverTrips = ({name, trips}: Driver): DriverTripsSummary => {
     const tripsWithinSpeedBounds = trips.filter(withinSpeedBounds)
 
     return ({
-        driverName: name,
+        name,
         totalMiles: totalMiles(tripsWithinSpeedBounds),
         averageMilesPerHour: averageMilesPerHour(tripsWithinSpeedBounds),
     })

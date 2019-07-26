@@ -1,5 +1,5 @@
-export interface TripSummary {
-    readonly driverName: string
+export interface DriverTripsSummary {
+    readonly name: string
     readonly totalMiles: number
     readonly averageMilesPerHour: number | null
 }

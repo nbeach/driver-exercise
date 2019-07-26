@@ -24,10 +24,10 @@ const splitOn = (pattern: RegExp): (input: string) => readonly string[] => {
         .filter(negate(isEmpty))
 }
 
-const toDriver = ([commandName, ...args]: readonly string[]): Driver => {
+const toDriver = ([commandName, ...commandArguments]: readonly string[]): Driver => {
     switch (commandName) {
-        case "Trip": return tripCommandToDriver(args)
-        case "Driver": return driverCommandToDriver(args)
+        case "Trip": return tripCommandToDriver(commandArguments)
+        case "Driver": return driverCommandToDriver(commandArguments)
         default: throw new Error("Unknown Command")
     }
 }

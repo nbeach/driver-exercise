@@ -2,13 +2,13 @@ import {expect} from "chai"
 import {Driver} from "../model/Driver"
 import {summarizeDriverTrips} from "./summarize"
 import {time} from "../common/test.util"
-import {TripSummary} from "../model/TripSummary"
+import {DriverTripsSummary} from "../model/DriverTripsSummary"
 
 
 describe(summarizeDriverTrips.name, () => {
 
     describe("processes driver into a summary that includes the", () => {
-        let summary: TripSummary
+        let summary: DriverTripsSummary
 
         beforeEach(() => {
             const driver: Driver = {
@@ -23,7 +23,7 @@ describe(summarizeDriverTrips.name, () => {
         })
 
         it("driver name", () => {
-            expect(summary.driverName).to.eql("Dan")
+            expect(summary.name).to.eql("Dan")
         })
 
         it("total miles driven", () => {
@@ -37,7 +37,7 @@ describe(summarizeDriverTrips.name, () => {
     })
 
     describe("when a driver has no trips it summarizes", () => {
-        let summary: TripSummary
+        let summary: DriverTripsSummary
 
         beforeEach(() => {
             const driver: Driver = {

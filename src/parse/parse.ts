@@ -47,15 +47,15 @@ const driverCommandToDriver = ([name]: readonly string[]): Driver => ({
 })
 
 const mergeDriversWithSameName = (drivers: ObjectMap<Driver>, nextDriver: Driver): ObjectMap<Driver> => {
-    const existingDriver = drivers[nextDriver.name]
+    const preexistingDriver = drivers[nextDriver.name]
 
-    const updatedDriver = existingDriver === undefined ? nextDriver : {
-        ...existingDriver,
-        trips: [...existingDriver.trips, ...nextDriver.trips],
+    const mergedDriver = preexistingDriver === undefined ? nextDriver : {
+        ...preexistingDriver,
+        trips: [...preexistingDriver.trips, ...nextDriver.trips],
     }
 
     return {
         ...drivers,
-        [nextDriver.name]: updatedDriver,
+        [mergedDriver.name]: mergedDriver,
     }
 }

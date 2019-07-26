@@ -9,6 +9,8 @@ export const driverSummariesView = (summaries: readonly DriverTripsSummary[]): s
 }
 
 const formatSummary = ({ name, totalMiles, averageMilesPerHour }: DriverTripsSummary): string => {
-    const formattedAverageMilesPerHourSection = averageMilesPerHour === null ? "" :  ` @ ${averageMilesPerHour.toFixed(0)} mph`
-    return `${name}: ${totalMiles.toFixed(0)} miles${formattedAverageMilesPerHourSection}\n`
+    const formattedDistance = `${totalMiles.toFixed(0)} miles`
+    const formattedAverageSpeed = averageMilesPerHour === null ? "" :  ` @ ${averageMilesPerHour.toFixed(0)} mph`
+
+    return `${name}: ${formattedDistance}${formattedAverageSpeed}\n`
 }

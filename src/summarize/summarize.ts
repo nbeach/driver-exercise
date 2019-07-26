@@ -1,7 +1,7 @@
 import {Driver} from "../model/Driver"
 import {Trip} from "../model/Trip"
 import {sumBy, isEmpty} from "lodash"
-import {hoursElapsed} from "../util/time.util"
+import {hoursElapsed} from "../common/time.util"
 import {TripSummary} from "../model/TripSummary"
 
 export const summarizeDriverTrips = ({name, trips}: Driver): TripSummary => {

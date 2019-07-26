@@ -1,7 +1,7 @@
 import {expect} from "chai"
 import {Driver} from "../model/Driver"
 import {summarizeDriverTrips} from "./summarize"
-import {time} from "../util/test.util"
+import {time} from "../common/test.util"
 import {TripSummary} from "../model/TripSummary"
 
 

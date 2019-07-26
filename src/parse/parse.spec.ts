@@ -1,7 +1,7 @@
 import {parseDrivers} from "./parse"
 import {expect} from "chai"
 import {Driver} from "../model/Driver"
-import {time} from "../util/test.util"
+import {time} from "../common/test.util"
 
 describe(parseDrivers.name, () => {
 
